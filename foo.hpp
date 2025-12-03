@@ -8,9 +8,13 @@
 
 std::vector< char > foo(std::list< Human >& people)
 {
-    std::vector< char > retval(people.size());
+    std::vector< char > wartosc(people.size());
 
-    // Twoja implementacja tutaj
+    std::for_each(people.begin(), people.end(), [](Human& h) { h.birthday(); });
 
-    return retval;
+    std::transform(people.rbegin(), people.rend(), wartosc.begin(), [](const Human& h) {
+        return h.isMonster() ? 'n' : 'y';
+    });
+
+    return wartosc;
 }
